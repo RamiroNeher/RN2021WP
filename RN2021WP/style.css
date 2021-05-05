@@ -1,0 +1,12 @@
+/*
+Theme Name: RN2021WP
+Theme URI: https://ramironeher.com
+Description: Este tema es heradado de Hijinksified(buscar en Github), customizado por Ramiro Neher. Se le agrega Bootstrap y se le eliminaron algunas funciones.
+Author: Ramiro Neher
+Author URI: https://ramironeher.com
+Version: 1.0
+*/
+
+@import 'css/general-settings.css';
+@import 'css/header.css';
+@import 'css/footer.css';
