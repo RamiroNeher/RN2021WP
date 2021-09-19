@@ -68,7 +68,7 @@ function my_jquery_enqueue() {
 /**
 *	Anula Gutenberg
 **/
-add_filter('use_block_editor_for_post_type', '__return_false', 100);
+// add_filter('use_block_editor_for_post_type', '__return_false', 100);
 
 /**
 *	Saca las entradas default
@@ -166,21 +166,23 @@ add_action( 'admin_head', 'hide_update_notice_to_all_but_admin_users', 1 );
 /** 
 * Agrega bootstrap css y js 
 */ 
-function bootstrap4_enqueue_scripts() { 
+function bootstrap5_enqueue_scripts() { 
     // jQuery is stated as a dependancy of bootstrap-js - it will be loaded by WordPress before the BS scripts 
-    wp_enqueue_script( 'slim-js', 'code.jquery.com/jquery-3.3.1.slim.min.js', array('jquery'), true); // all the bootstrap javascript goodness 
-    wp_enqueue_script( 'popper-js', 'cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', array('jquery'), true); // all the bootstrap javascript goodness 
-    wp_enqueue_script( 'bootstrap-js', '//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array('jquery'), true); // all the bootstrap javascript goodness 
+    wp_enqueue_script( 'bs-5-bundle-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js', false, true); // all the bootstrap javascript goodness 
+    // wp_enqueue_script( 'popper-js', 'cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', array('jquery'), true); // all the bootstrap javascript goodness 
+    // wp_enqueue_script( 'bootstrap-js', '//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array('jquery'), true); // all the bootstrap javascript goodness 
 } 
-add_action('wp_enqueue_scripts', 'bootstrap4_enqueue_scripts'); 
-function bootstrap4_enqueue_styles() {
-	wp_enqueue_script( 'bootstrap-js', '//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js', array('jquery'), true); // all the bootstrap javascript goodness
+add_action('wp_enqueue_scripts', 'bootstrap5_enqueue_scripts'); 
+
+function bootstrap5_enqueue_styles() {
 	
-	wp_enqueue_style( 'bootstrap-css', '//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css' ); 
+	wp_enqueue_style( 'bs-5-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css' ); 
 	// this will add the stylesheet from it's default theme location if your theme doesn't already 
 	//wp_enqueue_style( 'my-style', get_template_directory_uri() . '/style.css'); 
+
 } 
-add_action('wp_enqueue_scripts', 'bootstrap4_enqueue_styles');
+
+add_action('wp_enqueue_scripts', 'bootstrap5_enqueue_styles');
 
 /**
 *	Enqueue Scrips and styles
@@ -215,20 +217,23 @@ add_theme_support( 'menus' );
 
 /**
 *	Sidebars
-**
+**/
+/*
 if ( function_exists('register_sidebar') ) {
-	register_sidebar(array(
+    register_sidebar(array(
 		'name' => 'Blog',
 		'before_widget' => '<li id="%1$s" class="widget %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h2>',
 		'after_title' => '</h2>',
 	));
-} */
+ } 
+*/
 
 /**
 *	Cambia el largo de los expert por defecto
-**
+**/
+/*
 function wpe_excerptlength_index($length) {
     return 160;
 }
@@ -253,8 +258,8 @@ function wpe_excerpt($length_callback='', $more_callback='') {
 
 /**
 *	Agrega soporte para las miniaturas
-**
-add_theme_support( 'post-thumbnails' );
+**/
+/* add_theme_support( 'post-thumbnails' );
 //set_post_thumbnail_size( 50, 50, true );
 add_image_size( 'xlarge', 1200, 1200); */
 
@@ -281,13 +286,18 @@ register_post_type('custom', array(
 add_action( 'init', 'build_taxonomies', 0 );
 
 function build_taxonomies() {
-    register_taxonomy( 'taxo', 'custom', array( 'hierarchical' => true, 'label' => 'Custom Taxonomy', 'query_var' => true, 'rewrite' => true ) ); 
+    register_taxonomy( 'taxo', 'custom', array( 
+        'hierarchical' => true, 
+        'label' => 'Custom Taxonomy', 
+        'query_var' => true, 
+        'rewrite' => true 
+    ) ); 
 }
 
 /**
 * ACF OPTION PAGE
-**
-if( function_exists('acf_add_options_page') ) {
+**/
+/* if( function_exists('acf_add_options_page') ) {
 	
 	acf_add_options_page(array(
 		'page_title' 	=> 'Theme General Settings',
